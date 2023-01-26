@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script is displaying "Best School" 10 times using until
+a=11
+until [ $a == 1 ]
+do
+    echo "Best School"
+    a=$((a-1))
+done
