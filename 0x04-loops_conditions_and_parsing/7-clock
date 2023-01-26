@@ -3,7 +3,7 @@
 count=0
 while [ $count -le 12 ]
 do
-    echo "Hours: $count"
+    echo "Hour: $count"
     (( count++ ))
     minute=1
     while [ $minute -le 59 ]
