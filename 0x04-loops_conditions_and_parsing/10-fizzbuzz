@@ -5,7 +5,7 @@ for((a=1; a <101; a++))
 do
     if((a%15 == 0));
     then
-        echo "Fizzbuzz"
+        echo "FizzBuzz"
     elif((a%3 == 0));
     then
         echo "Fizz"
