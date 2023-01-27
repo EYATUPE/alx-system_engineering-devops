@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Fizzbuzz - a Bash script that displays numbers from 1 to 100.
+# This Script displays numbers from 1 to 100. with Fizzbuzz
 
 for((a=1; a <101; a++))
 do
-    if ((a%15 == 0));
+    if((a%15 == 0));
     then
         echo "Fizzbuzz"
     elif((a%3 == 0));
