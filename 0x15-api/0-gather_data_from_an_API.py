@@ -1,39 +1,33 @@
 #!/usr/bin/python3
-
-"""
+"""""""
 This module/Script retrieves information about an employee's TODO list progress from the JSONPlaceholder API.
 """
 
 import requests
 import sys
 
-# The base URL for the API
-BASE_URL = "https://jsonplaceholder.typicode.com"
 
-# The endpoint for retrieving the employee's TODO list
-TODO_ENDPOINT = "/todos?userId={}"
+if __name__ == '__main__':
+    employeeId = sys.argv[1]
+    baseUrl = "https://jsonplaceholder.typicode.com/users"
+    url = baseUrl + "/" + employeeId
 
-# The endpoint for retrieving the employee's information
-USER_ENDPOINT = "/users/{}"
+    response = requests.get(url)
+    employeeName = response.json().get('name')
 
-# The employee ID is passed as a command line argument
-employee_id = int(sys.argv[1])
+    todoUrl = url + "/todos"
+    response = requests.get(todoUrl)
+    tasks = response.json()
+    done = 0
+    done_tasks = []
 
-# Make the request to the API to retrieve the employee's TODO list
-todo_response = requests.get(BASE_URL + TODO_ENDPOINT.format(employee_id))
-todo_data = todo_response.json()
+    for task in tasks:
+        if task.get('completed'):
+            done_tasks.append(task)
+            done += 1
 
-# Make the request to the API to retrieve the employee's information
-user_response = requests.get(BASE_URL + USER_ENDPOINT.format(employee_id))
-user_data = user_response.json()
+    print("Employee {} is done with tasks({}/{}):"
+          .format(employeeName, done, len(tasks)))
 
-# Extract the relevant data from the responses
-employee_name = user_data['name']
-num_done_tasks = sum(1 for task in todo_data if task['completed'])
-total_tasks = len(todo_data)
-done_tasks_titles = [task['title'] for task in todo_data if task['completed']]
-
-# Print the output in the required format
-print(f"Employee {employee_name} is done with {num_done_tasks}/{total_tasks} tasks:")
-for title in done_tasks_titles:
-    print(f"\t- {title}")
+    for task in done_tasks:
+        print("\t {}".format(task.get('title')))
