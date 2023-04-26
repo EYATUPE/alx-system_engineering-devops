@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+"""
+This module/Script retrieves information about an employee's TODO list progress from the JSONPlaceholder API.
+"""
+
 import requests
 import sys
 
